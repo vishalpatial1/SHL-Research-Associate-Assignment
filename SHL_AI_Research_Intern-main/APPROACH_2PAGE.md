@@ -1,6 +1,6 @@
 # SHL Assessment Recommendation System - Approach Document
 
-**Submission by:** Jay Tiwari | **Position:** AI Reach Intern | **Company:** SHL Company
+**Submission by:** Vishal Patial | **Position:** AI Research Intern | **Company:** SHL Company
 
 ---
 
@@ -158,5 +158,5 @@ The system successfully combines semantic search with LLM intelligence to provid
 
 ---
 
-**Submitted by:** Jay Tiwari | **Position:** AI Reach Intern | **Company:** SHL Company
+**Submitted by:** Vishal Patial  | **Position:** AI Research Intern | **Company:** SHL Company
 
