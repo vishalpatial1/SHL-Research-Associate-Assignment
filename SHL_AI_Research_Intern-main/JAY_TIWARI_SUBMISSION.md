@@ -1,14 +1,5 @@
 # SHL Assessment Recommendation System
-## Submission by Jay Tiwari - AI Reach Intern
 
----
-
-## Candidate Information
-
-- **Name:** Jay Tiwari
-- **Position:** AI Reach Intern
-- **Company:** SHL Company
-- **Project:** SHL Assessment Recommendation System
 
 ---
 
@@ -150,5 +141,5 @@ SHL Company
 
 ---
 
-**Submission Date:** 2025
+
 
