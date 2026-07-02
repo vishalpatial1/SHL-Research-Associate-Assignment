@@ -2,8 +2,8 @@
 
 ## Submission Details
 
-- **Name:** Jay Tiwari
-- **Position:** AI Reach Intern
+- **Name:** Vishal Patial
+- **Position:** AI Research Intern
 - **Company:** SHL Company
 - **Project:** SHL Assessment Recommendation System
 
@@ -33,5 +33,5 @@ An intelligent recommendation system that helps hiring managers and recruiters f
 
 ---
 
-**Submission Date:** 2025
+**Submission Date:** 2026
 
