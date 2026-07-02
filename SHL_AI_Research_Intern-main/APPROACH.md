@@ -1,7 +1,7 @@
 # SHL Assessment Recommendation System - Approach Document
 
-**Submission by:** Jay Tiwari  
-**Position:** AI Reach Intern  
+**Submission by:** Vishal Patial 
+**Position:** AI Research Intern  
 **Company:** SHL Company
 
 ## Executive Summary
