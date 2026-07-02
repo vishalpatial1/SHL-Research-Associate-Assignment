@@ -60,20 +60,14 @@ After creating the PDF, verify:
 - [ ] Document is exactly 2 pages
 - [ ] All sections are readable
 - [ ] Formatting looks professional
-- [ ] Submission info (Jay Tiwari, AI Reach Intern, SHL Company) is visible
-- [ ] File name: `APPROACH_JAY_TIWARI.pdf`
+
+
 
 ---
 
 ## Quick Steps Summary
 
-**Easiest Method:**
-1. Open `APPROACH_JAY_TIWARI.html` in browser
-2. Press `Ctrl+P` (or `Cmd+P`)
-3. Select "Save as PDF"
-4. Set margins to "Minimum"
-5. Enable "Background graphics"
-6. Save as `APPROACH_JAY_TIWARI.pdf`
+
 
 **Done!** ✅
 
