@@ -1,11 +1,4 @@
-"""
-Recommendation Engine for SHL Assessments
-Uses semantic search with embeddings and LLM-based ranking
 
-Submission by: Jay Tiwari
-Position: AI Reach Intern
-Company: SHL Company
-"""
 
 import json
 import os
