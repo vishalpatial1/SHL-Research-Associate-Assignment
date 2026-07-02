@@ -1,8 +1,5 @@
 # SHL Assessment Recommendation System
 
-**Submission by:** Jay Tiwari  
-**Position:** AI Reach Intern  
-**Company:** SHL Company
 
 An intelligent recommendation system that helps hiring managers and recruiters find the right SHL assessments for their roles using natural language queries or job descriptions.
 
