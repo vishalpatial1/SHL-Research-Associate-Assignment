@@ -1,9 +1,5 @@
 """
-FastAPI Backend for SHL Assessment Recommendation System
 
-Submission by: Jay Tiwari
-Position: AI Reach Intern
-Company: SHL Company
 """
 
 from fastapi import FastAPI, HTTPException
