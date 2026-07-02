@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHL Assessment Recommendation System - Jay Tiwari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .results-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .results-header h2 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .results-count {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .assessment-card {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .assessment-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .assessment-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .assessment-name a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .assessment-name a:hover {
+            text-decoration: underline;
+        }
+
+        .assessment-type {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+        }
+
+        .assessment-description {
+            color: #666;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #c33;
+        }
+
+        .api-config {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .api-config h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .api-config input {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 SHL Assessment Recommendation System</h1>
+            <p>Find the perfect assessments for your hiring needs</p>
+            <p style="font-size: 0.9em; opacity: 0.8;">Submission by Jay Tiwari - AI Reach Intern</p>
+        </div>
+
+        <div class="content">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="query">Enter your query or job description:</label>
+                    <textarea id="query" placeholder="e.g., I am hiring for Java developers who can also collaborate effectively with my business teams."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="url">Or provide a job description URL:</label>
+                    <input type="text" id="url" placeholder="https://example.com/job-description">
+                </div>
+
+                <div class="api-config">
+                    <h3>API Configuration</h3>
+                    <label for="apiUrl">API Base URL:</label>
+                    <input type="text" id="apiUrl" value="http://localhost:8000" placeholder="http://localhost:8000">
+                </div>
+
+                <div class="button-group">
+                    <button id="submitBtn" onclick="getRecommendations()">Get Recommendations</button>
+                    <button onclick="clearResults()">Clear</button>
+                </div>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 15px; color: #666;">Finding the best assessments for you...</p>
+            </div>
+
+            <div class="results" id="results">
+                <div class="results-header">
+                    <h2>Recommended Assessments</h2>
+                    <div class="results-count" id="resultsCount"></div>
+                </div>
+                <div id="assessmentsList"></div>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000';
+
+        async function getRecommendations() {
+            const query = document.getElementById('query').value.trim();
+            const url = document.getElementById('url').value.trim();
+            const apiUrl = document.getElementById('apiUrl').value.trim() || API_BASE_URL;
+
+            if (!query && !url) {
+                showError('Please enter either a query or a URL');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('submitBtn').disabled = true;
+
+            try {
+                const requestBody = {};
+                if (query) {
+                    requestBody.query = query;
+                }
+                if (url) {
+                    requestBody.url = url;
+                }
+
+                const response = await fetch(`${apiUrl}/recommend`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Failed to get recommendations');
+                }
+
+                displayResults(data);
+
+            } catch (error) {
+                showError('Error: ' + error.message);
+            } finally {
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('submitBtn').disabled = false;
+            }
+        }
+
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+            const listDiv = document.getElementById('assessmentsList');
+            const countDiv = document.getElementById('resultsCount');
+
+            countDiv.textContent = `Found ${data.count} recommendation${data.count !== 1 ? 's' : ''}`;
+
+            listDiv.innerHTML = '';
+
+            data.recommendations.forEach((assessment, index) => {
+                const card = document.createElement('div');
+                card.className = 'assessment-card';
+
+                let html = `
+                    <div class="assessment-name">
+                        <a href="${assessment.url}" target="_blank">${index + 1}. ${assessment.name}</a>
+                    </div>
+                `;
+
+                if (assessment.test_type) {
+                    html += `<span class="assessment-type">${assessment.test_type}</span>`;
+                }
+
+                if (assessment.description) {
+                    html += `<div class="assessment-description">${assessment.description}</div>`;
+                }
+
+                html += `<div style="margin-top: 10px;"><a href="${assessment.url}" target="_blank" style="color: #667eea; text-decoration: none;">View Assessment →</a></div>`;
+
+                card.innerHTML = html;
+                listDiv.appendChild(card);
+            });
+
+            resultsDiv.classList.add('active');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function clearResults() {
+            document.getElementById('query').value = '';
+            document.getElementById('url').value = '';
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('error').style.display = 'none';
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('query').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                getRecommendations();
+            }
+        });
+    </script>
+</body>
+</html>
+
